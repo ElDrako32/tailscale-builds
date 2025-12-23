@@ -24,10 +24,9 @@ on:
          default: ^1.18.3
          required: true
 env:
-  GOOS1: linux
-  GOARCH1: arm
-  GOARM1: 5
-
+  GOOS: ${{ inputs.os }}
+  GOARCH: ${{ inputs.arch }}
+  GOARM: ${{ inputs.armver }}
 jobs:
   build:
     name: Build job
@@ -35,9 +34,6 @@ jobs:
     steps:
      - name: Echo input version
        run: 'echo version=${{ inputs.version }}'
-       run: 'echo GOOS=${{ inputs.os }}'
-       run: 'echo GOARCH=${{ inputs.arch }}'
-       run: 'echo GOARM=${{ inputs.armver }}'
      - uses: actions/setup-go@v3
        with:
          go-version: '${{ inputs.gover }}' # The Go version to download (if necessary) and use.
